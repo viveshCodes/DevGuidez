@@ -1,21 +1,20 @@
-/*_______________getting data________________
-____________________________________________*/
-db.collection('guides').get()
-    .then(snpashot =>{
-        setupGuides(snpashot.docs);
-    }).catch(err =>{
-        console.log(err);
-    });
-
 /*_________Track Auth Status__________________
 ______________________________________________*/
 auth.onAuthStateChanged(user =>{
     if(user){
-        console.log('User is logged in :', user);
+       /*_______________getting data________________
+        ____________________________________________*/
+            db.collection('guides').get()
+            .then(snpashot =>{
+                setupGuides(snpashot.docs);
+            }).catch(err =>{
+                console.log(err);
+            });
     }else{
-        console.log('User logged out');
+        setupGuides([]); // pass an empty array
     }
 });
+
 
 
 /*_________________sign up _____________________
