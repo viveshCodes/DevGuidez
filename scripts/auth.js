@@ -1,5 +1,6 @@
 // sign up 
 const signupForm = document.querySelector('#signup-form');
+
 signupForm.addEventListener('submit', (event)=>{
     event.preventDefault();
 
@@ -11,8 +12,6 @@ signupForm.addEventListener('submit', (event)=>{
     // sign up the user               __these two parameters are declared above
     auth.createUserWithEmailAndPassword(email, password)
         .then(cred =>{               // here response is cred
-            console.log(cred.user);
-
             // close the modal
             const modal = document.querySelector("#modal-signup");
             M.Modal.getInstance(modal).close();   // modal from above DOM manipulation
@@ -23,4 +22,16 @@ signupForm.addEventListener('submit', (event)=>{
             console.log(err);
         });
 
+});
+
+
+// logout
+const logout = document.querySelector('#logout');
+
+logout.addEventListener('click', event =>{
+    event.preventDefault();
+    auth.signOut()   // firebase logs out with this method
+        .then(()=>{
+            console.log("User is logged out");
+        });
 });
