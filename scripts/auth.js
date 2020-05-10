@@ -1,3 +1,12 @@
+/*_______________getting data________________
+____________________________________________*/
+db.collection('guides').get()
+    .then(snpashot =>{
+        setupGuides(snpashot.docs);
+    }).catch(err =>{
+        console.log(err);
+    });
+
 /*_________Track Auth Status__________________
 ______________________________________________*/
 auth.onAuthStateChanged(user =>{
