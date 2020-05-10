@@ -1,3 +1,14 @@
+/*_________Track Auth Status__________________
+______________________________________________*/
+auth.onAuthStateChanged(user =>{
+    if(user){
+        console.log('User is logged in :', user);
+    }else{
+        console.log('User logged out');
+    }
+});
+
+
 /*_________________sign up _____________________
 _______________________________________________*/
 const signupForm = document.querySelector('#signup-form');
@@ -32,10 +43,8 @@ const logout = document.querySelector('#logout');
 
 logout.addEventListener('click', (event) =>{
     event.preventDefault();
-    auth.signOut()   // firebase logs out with this method
-        .then(()=>{
-            console.log("User is logged out");
-        });
+    auth.signOut();  // firebase logs out with this method
+       
 });
 
 
@@ -52,8 +61,7 @@ loginForm.addEventListener('submit', event =>{
 
     auth.signInWithEmailAndPassword(email,password)
         .then(cred =>{
-            console.log(cred.user);
-
+            
             // close login modal 
             const modal = document.querySelector("#modal-login");
             M.Modal.getInstance(modal).close();   // modal from above DOM manipulation
