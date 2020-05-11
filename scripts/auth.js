@@ -16,12 +16,17 @@ adminForm.addEventListener('submit', (event)=>{
 ______________________________________________*/
 auth.onAuthStateChanged(user =>{
     if(user){
+        user.getIdTokenResult().then(idTokenResult =>{
+            // set admin property on user
+            user.admin = idTokenResult.claims.admin;
+            setupUI(user);
+        })
        /*_______________getting data________________
         ____________________________________________*/
             db.collection('guides')
             .onSnapshot(snapshot =>{
                 setupGuides(snapshot.docs);
-                setupUI(user);
+              
             }, err =>{
                 console.log(err.message);
             });
