@@ -8,7 +8,7 @@ adminForm.addEventListener('submit', (event)=>{
     addAdminRole({email:adminEmail}).then(result =>{
         console.log(result);
         adminForm.reset();
-    })
+    });
 })
 
 
@@ -81,7 +81,9 @@ signupForm.addEventListener('submit', (event)=>{
        M.Modal.getInstance(modal).close();   // modal from above DOM manipulation
         // clear form after submit
        signupForm.reset();
-   });
+   }).catch(err => {
+    signupForm.querySelector('.error').innerHTML = err.message;
+  });
 
 });
 
