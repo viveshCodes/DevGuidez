@@ -17,6 +17,24 @@ auth.onAuthStateChanged(user =>{
     }
 });
 
+/*________________create new guide________________
+____________________________________________________*/ 
+const createForm = document.querySelector('#create-form');
+createForm.addEventListener('submit', (event) =>{
+    event.preventDefault();
+    db.collection('guides').add({
+        title : createForm['title'].value.trim(),
+        content:createForm['content'].value.trim()
+    }).then(()=>{
+        // close the modal
+        const modal = document.querySelector("#modal-create");
+        M.Modal.getInstance(modal).close();   // modal from above DOM manipulation
+         // clear form after submit
+        createForm.reset();
+    }).catch(err =>{
+        console.log(err);
+    })
+});
 
 /*_________________sign up _____________________
 _______________________________________________*/
