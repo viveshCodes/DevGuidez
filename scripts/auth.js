@@ -7,14 +7,15 @@ auth.onAuthStateChanged(user =>{
             db.collection('guides').get()
             .then(snpashot =>{
                 setupGuides(snpashot.docs);
+                setupUI(user);
             }).catch(err =>{
                 console.log(err);
             });
     }else{
         setupGuides([]); // pass an empty array
+        setupUI();
     }
 });
-
 
 
 /*_________________sign up _____________________
