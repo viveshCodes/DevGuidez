@@ -9,7 +9,7 @@ auth.onAuthStateChanged(user =>{
                 setupGuides(snapshot.docs);
                 setupUI(user);
             }).catch(err =>{
-                console.log(err);
+                console.log(err.message);
             });
     }else{
         setupGuides([]); // pass an empty array
