@@ -8,7 +8,7 @@ auth.onAuthStateChanged(user =>{
             .onSnapshot(snapshot =>{
                 setupGuides(snapshot.docs);
                 setupUI(user);
-            }).catch(err =>{
+            }, err =>{
                 console.log(err.message);
             });
     }else{
@@ -50,16 +50,18 @@ signupForm.addEventListener('submit', (event)=>{
    
     // sign up the user               __these two parameters are declared above
     auth.createUserWithEmailAndPassword(email, password)
-        .then(cred =>{               // here response is cred
-            // close the modal
-            const modal = document.querySelector("#modal-signup");
-            M.Modal.getInstance(modal).close();   // modal from above DOM manipulation
-             // clear form after submit
-            signupForm.reset();
+    .then(cred =>{   // here response is cred
+        return db.collection('users').doc(cred.user.uid).set({
+            bio:signupForm['signup-bio'].value.trim()
+        });         
 
-        }).catch(err =>{
-            console.log(err);
-        });
+   }).then(() =>{
+       // close the modal
+       const modal = document.querySelector("#modal-signup");
+       M.Modal.getInstance(modal).close();   // modal from above DOM manipulation
+        // clear form after submit
+       signupForm.reset();
+   });
 
 });
 
