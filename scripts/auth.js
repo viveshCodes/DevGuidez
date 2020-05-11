@@ -7,6 +7,7 @@ adminForm.addEventListener('submit', (event)=>{
     const addAdminRole = functions.httpsCallable('addAdminRole');
     addAdminRole({email:adminEmail}).then(result =>{
         console.log(result);
+        adminForm.reset();
     })
 })
 
