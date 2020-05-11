@@ -1,3 +1,17 @@
+/*_____________Add Admin Cloud Function__________
+____________________________________________________*/
+const adminForm = document.querySelector('.admin-actions');
+adminForm.addEventListener('submit', (event)=>{
+    event.preventDefault();
+    const adminEmail = document.querySelector('#admin-email').value.trim();
+    const addAdminRole = functions.httpsCallable('addAdminRole');
+    addAdminRole({email:adminEmail}).then(result =>{
+        console.log(result);
+    })
+})
+
+
+
 /*_________Track Auth Status__________________
 ______________________________________________*/
 auth.onAuthStateChanged(user =>{
