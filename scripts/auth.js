@@ -4,9 +4,9 @@ auth.onAuthStateChanged(user =>{
     if(user){
        /*_______________getting data________________
         ____________________________________________*/
-            db.collection('guides').get()
-            .then(snpashot =>{
-                setupGuides(snpashot.docs);
+            db.collection('guides')
+            .onSnapshot(snapshot =>{
+                setupGuides(snapshot.docs);
                 setupUI(user);
             }).catch(err =>{
                 console.log(err);
